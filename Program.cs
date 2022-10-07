@@ -7,14 +7,22 @@ using MathNet.Numerics.LinearAlgebra;
 public partial class MyClass
 {
     [JSExport]
-    internal static void DoMath(int n)
+    internal static async Task DoMath(int n)
     {
         SetText("Running...");
 
         var matrixA = Matrix<double>.Build.Random(n,n);
         var vectorB = Vector<double>.Build.Random(n);
 
-        TimedResult result = TimeIt(() => matrixA.Solve(vectorB)); // Solve Ax = b
+        TaskCompletionSource<TimedResult> tcs = new();
+
+        var thread = new Thread(() => {
+                TimedResult result = TimeIt(() => matrixA.Solve(vectorB)); // Solve Ax = b
+                tcs.SetResult(result);
+        });
+        thread.Start();
+
+        var result = await tcs.Task;
 
         SetText($"{result.Result}\nTime taken: {result.Time} ms");
     }

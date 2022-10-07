@@ -5,6 +5,7 @@
     <WasmMainJSPath>main.js</WasmMainJSPath>
     <OutputType>Exe</OutputType>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WasmEnableThreads>true</WasmEnableThreads>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,5 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <!-- provides reference assemblies that will prevent warnings about new Thread() and other threading APIs being unavailable on the browser -->
+    <PackageReference Include="Microsoft.NET.WebAssembly.Threading" Version="7.0.0-rc.2.*" />
   </ItemGroup>
 </Project>

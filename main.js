@@ -26,9 +26,9 @@ setModuleImports('main.js', {
 const config = getConfig();
 const exports = await getAssemblyExports(config.mainAssemblyName);
 
-document.getElementById("startstop").onclick = () => {
+document.getElementById("startstop").onclick = async () => {
     const n = parseInt(document.getElementById("inputN").value);
-    exports.MyClass.DoMath(n);
+    await exports.MyClass.DoMath(n);
 }
 
 exports.MyClass.Tick();
