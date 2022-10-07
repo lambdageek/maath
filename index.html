@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--  Licensed to the .NET Foundation under one or more agreements. -->
+<!-- The .NET Foundation licenses this file to you under the MIT license. -->
+<html>
+
+<head>
+  <title>maath</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="modulepreload" href="./main.js" />
+  <link rel="modulepreload" href="./dotnet.js" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="controls">
+    <div>
+      <div id="description">
+        <span>
+          Solve the equation: 𝐴𝐱=𝐛, where 𝐴 is a square N by N matrix and 𝐛 is a vector of length N.
+        </span>
+      </div>
+      <div id="math_controls">
+        <label for="inputN">N=</label>
+        <input type="text" id="inputN" value="500" />
+        <button id="startstop">Solve</button>
+      </div>
+    </div>
+    <div id="tick">🅰</div>
+  </div>
+
+  <div>
+    <span id="out"></span>
+  </div>
+
+
+  <script type='module' src="./main.js"></script>
+</body>
+
+</html>
