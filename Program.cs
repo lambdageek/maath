@@ -14,18 +14,25 @@ public partial class MyClass
         var matrixA = Matrix<double>.Build.Random(n,n);
         var vectorB = Vector<double>.Build.Random(n);
 
-        var start = DateTimeOffset.Now;
+        TimedResult result = TimeIt(() => matrixA.Solve(vectorB)); // Solve Ax = b
 
-        var x = matrixA.Solve(vectorB); // Solve Ax = b
-
-        var end = DateTimeOffset.Now;
-
-        var time = (end - start).TotalMilliseconds;
-
-        SetText($"{x}\nTime taken: {time} ms");
+        SetText($"{result.Result}\nTime taken: {result.Time} ms");
     }
 
+    struct TimedResult
+    {
+        public double Time;
+        public Vector<double> Result;
+    }
 
+    static TimedResult TimeIt(Func<Vector<double>> f)
+    {
+        var start = DateTimeOffset.Now;
+        var result = f();
+        var end = DateTimeOffset.Now;
+        var time = (end - start).TotalMilliseconds;
+        return new TimedResult { Time = time, Result = result };
+    }
 
     [JSImport("MyClass.updateTick", "main.js")]
     static partial void UpdateTick(string message);
@@ -34,7 +41,6 @@ public partial class MyClass
     static partial void SetText(string message);
 
     [JSExport]
-    [return:JSMarshalAs<JSType.Promise<JSType.Void>>]
     public static async Task Tick()
     {
         string[] pix = {"🅰", "🅱", "🅲", "🅳", "🅴", "🅵", "🅶", "🅷", "🅸", "🅹", "🅺", "🅻", "🅼", "🅽", "🅾", "🅿︎", "🆀", "🆁", "🆂", "🆃", "🆄", "🆅", "🆆", "🆇", "🆈", "🆉"};
