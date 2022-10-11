@@ -1,25 +1,13 @@
-## Browser application
+## MathNet linear algebra in the browser
 
-## Build
+This is the multi-threaded version of the demo that offloads the math computation to a background thread.
 
-You can build the application from Visual Studio or by dotnet cli
+The single-threaded version runs the computation on the UI thread is [on the `main` branch](https://github.com/lambdageek/maath/tree/main)
 
-```
-dotnet build -c Debug/Release
-```
+## Build/run
+
+Use `dotnet build` and `dotnet run` to build and serve the app.
+
 
 After building the application, the result is in the `bin/$(Configuration)/net7.0/browser-wasm/AppBundle` directory.
 
-## Run
-
-You can build the application from Visual Studio or by dotnet cli
-
-```
-dotnet run -c Debug/Release
-```
-
-Or you can start any static file server from the AppBundle directory
-
-```
-dotnet serve -d:bin/$(Configuration)/net7.0/browser-wasm/AppBundle
-```
